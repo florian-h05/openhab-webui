@@ -275,7 +275,7 @@ import { loadLocaleMessages } from '@/js/i18n'
 import auth from './auth-mixin'
 import i18n from './i18n-mixin'
 import connectionHealth from './connection-health-mixin'
-import sseEvents from './sse-events-mixin'
+import sseEvents from './events-mixin'
 
 import dayjs from 'dayjs'
 import dayjsLocales from 'dayjs/locale.json'

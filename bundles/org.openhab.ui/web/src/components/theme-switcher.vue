@@ -66,7 +66,7 @@
           </f7-list-item>
           <f7-list-item>
             <span v-t="'about.miscellaneous.home.background'" />
-            <f7-segmented class="home-navbar-selection">
+            <f7-segmented>
               <f7-button outline small :active="homePageBackground === 'default'" @click="setHomePageBackground('default')">
                 {{ $t('about.miscellaneous.home.background.default') }}
               </f7-button>
@@ -95,6 +95,20 @@
             <f7-toggle :checked="webAudio === 'enabled'" @toggle:change="setWebAudio" />
           </f7-list-item>
           <item-picker :title="$t('about.miscellaneous.commandItem.title')" :multiple="false" :value="commandItem" @input="setCommandItem" />
+          <f7-list-item>
+            <span v-t="'about.miscellaneous.tracking.mode'" />
+            <f7-segmented>
+              <f7-button outline small :active="trackingMode === 'auto'" @click="setTrackingMode('auto')">
+                {{ $t('about.miscellaneous.home.background.default') }}
+              </f7-button>
+              <f7-button outline small :active="trackingMode === 'ws'" @click="setTrackingMode('ws')">
+                WS
+              </f7-button>
+              <f7-button outline small :active="trackingModes === 'sse'" @click="setTrackingMode('sse')">
+                SSE
+              </f7-button>
+            </f7-segmented>
+          </f7-list-item>
         </f7-list>
       </f7-col>
     </f7-row>
@@ -103,7 +117,7 @@
 
 <style lang="stylus">
 .theme-switcher
-  .home-navbar-selection
+  .segmented
     .button
       width auto
 </style>
@@ -165,6 +179,10 @@ export default {
     setCommandItem (value) {
       localStorage.setItem('openhab.ui:commandItem', value)
       setTimeout(() => { location.reload() }, 50) // Delay reload, otherwise it doesn't work
+    },
+    setTrackingMode (value) {
+      localStorage.setItem('openhab.ui:tracking.mode', value)
+      location.reload()
     }
   },
   computed: {
@@ -197,6 +215,9 @@ export default {
     },
     commandItem () {
       return localStorage.getItem('openhab.ui:commandItem') || ''
+    },
+    trackingMode () {
+      return localStorage.getItem('openhab.ui:tracking.mode') || 'auto'
     }
   }
 }
