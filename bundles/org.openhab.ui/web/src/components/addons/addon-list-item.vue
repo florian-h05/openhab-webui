@@ -23,7 +23,7 @@
         <f7-button
           v-else
           class="install-button prevent-active-state-propagation"
-          :text="addon.installed ? 'Remove' : installActionText || 'Install'"
+          :text="addon.installed ? 'Remove' : (installActionText || 'Install')"
           :color="addon.installed ? 'red' : 'blue'"
           round
           small
